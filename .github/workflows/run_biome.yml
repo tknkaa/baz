@@ -1,0 +1,23 @@
+name: Biome Check
+
+on: [push]
+
+jobs:
+  eslint-prettier-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run Biome Check
+        run: bunx @biomejs/biome lint .
